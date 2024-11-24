@@ -51,22 +51,22 @@ public class TelaInicialFrame extends JFrame {
 // Botões
         JButton btCursoAnalise = new JButton("<html> Cursos </html>");
         JButton btCadastrarAluno = new JButton("<html> Cadastrar Aluno </html>");
-        JButton cursoEngenharia = new JButton("<html> Consultar Aluno </html>");
+        JButton btConsultarAluno = new JButton("<html> Consultar Aluno </html>");
 
 // Centralizando o texto dentro dos botões
         btCursoAnalise.setHorizontalAlignment(SwingConstants.CENTER);
         btCadastrarAluno.setHorizontalAlignment(SwingConstants.CENTER);
-        cursoEngenharia.setHorizontalAlignment(SwingConstants.CENTER);
+        btConsultarAluno.setHorizontalAlignment(SwingConstants.CENTER);
 
 // Adicionando o afastamento nas laterais dos botões
         btCursoAnalise.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
         btCadastrarAluno.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
-        cursoEngenharia.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
+        btConsultarAluno.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
 
 // Adicionando os botões ao painel
         opcoes.add(btCursoAnalise);
         opcoes.add(btCadastrarAluno);
-        opcoes.add(cursoEngenharia);
+        opcoes.add(btConsultarAluno);
 
 // Criando um painel para a frase final (rodapé)
         JPanel rodape = new JPanel();
@@ -181,7 +181,7 @@ public class TelaInicialFrame extends JFrame {
         });
 
         // Manipulador de Eventos para o botão Consultar Aluno
-        cursoEngenharia.addActionListener(new ActionListener() {
+        btConsultarAluno.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
@@ -221,7 +221,7 @@ public class TelaInicialFrame extends JFrame {
                 mais de 80 mil livros, centros esportivos, teatros, auditórios e mais de 100 laboratórios."""));
 
         // Tamanho dos botões
-        setButtonSize(btCursoAnalise, btCadastrarAluno, cursoEngenharia);
+        setButtonSize(btCursoAnalise, btCadastrarAluno, btConsultarAluno);
 
         //Funçao dos Botões
         // Adicionando um MouseListener para trocar as frases quando o mouse passa por cima
