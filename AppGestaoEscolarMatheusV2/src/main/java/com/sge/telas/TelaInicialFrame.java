@@ -46,25 +46,29 @@ public class TelaInicialFrame extends JFrame {
 
 /// Criando o painel para as opções (botões)
         JPanel opcoes = new JPanel();
-        opcoes.setLayout(new GridLayout(0, 3, 25, 25)); // Mantém o espaçamento entre os botões
+        opcoes.setLayout(new GridLayout(2, 3, 25, 25)); // Mantém o espaçamento entre os botões
 
 // Botões
         JButton btCursoAnalise = new JButton("<html> Cursos </html>");
+        JButton btCadastrarCurso = new JButton("<html> Cadastrar Curso </html>");
         JButton btCadastrarAluno = new JButton("<html> Cadastrar Aluno </html>");
         JButton btConsultarAluno = new JButton("<html> Consultar Aluno </html>");
 
 // Centralizando o texto dentro dos botões
         btCursoAnalise.setHorizontalAlignment(SwingConstants.CENTER);
+        btCadastrarCurso.setHorizontalAlignment(SwingConstants.CENTER);
         btCadastrarAluno.setHorizontalAlignment(SwingConstants.CENTER);
         btConsultarAluno.setHorizontalAlignment(SwingConstants.CENTER);
 
 // Adicionando o afastamento nas laterais dos botões
         btCursoAnalise.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
+        btCadastrarCurso.setBorder(BorderFactory.createEmptyBorder(0,50,0,50)); // 10 pixels de afastamento nas laterais
         btCadastrarAluno.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
         btConsultarAluno.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
 
 // Adicionando os botões ao painel
         opcoes.add(btCursoAnalise);
+        opcoes.add(btCadastrarCurso);
         opcoes.add(btCadastrarAluno);
         opcoes.add(btConsultarAluno);
 
@@ -189,7 +193,7 @@ public class TelaInicialFrame extends JFrame {
             }
         });
 
-        // Manipulador de Eventos para o botão Cadastrar Curso
+        // Manipulador de Eventos para o botão Consultar Curso
         btCursoAnalise.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -221,7 +225,7 @@ public class TelaInicialFrame extends JFrame {
                 mais de 80 mil livros, centros esportivos, teatros, auditórios e mais de 100 laboratórios."""));
 
         // Tamanho dos botões
-        setButtonSize(btCursoAnalise, btCadastrarAluno, btConsultarAluno);
+        setButtonSize(btCursoAnalise, btCadastrarCurso, btCadastrarAluno, btConsultarAluno);
 
         //Funçao dos Botões
         // Adicionando um MouseListener para trocar as frases quando o mouse passa por cima
@@ -244,7 +248,7 @@ public class TelaInicialFrame extends JFrame {
     private void setButtonSize(JButton... buttons) {
         for (JButton button : buttons) {
             button.setFont(new Font("Arial", Font.PLAIN, 24)); // Definindo a fonte
-            button.setPreferredSize(new Dimension(200, 200)); // Definindo o tamanho do botão
+            button.setPreferredSize(new Dimension(100, 100)); // Definindo o tamanho do botão
         }
     }
 }
