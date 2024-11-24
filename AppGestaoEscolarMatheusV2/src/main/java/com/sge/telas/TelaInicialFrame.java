@@ -95,6 +95,7 @@ public class TelaInicialFrame extends JFrame {
         JMenu menuLogout = new JMenu("Logout");
 
         // Criando os itens do Menu
+        JMenuItem itemCadastrarCurso = new JMenuItem("Cadastrar Curso");
         JMenuItem itemCadastrarAluno = new JMenuItem("Cadastrar Aluno");
         JMenuItem itemCadastrarNota = new JMenuItem("Cadastrar Nota");
 
@@ -105,6 +106,8 @@ public class TelaInicialFrame extends JFrame {
         JMenuItem itemSair = new JMenuItem("Sair");
 
         // Adicionando os itens ao menu Cadastro
+        menuCadastro.add(itemCadastrarCurso);
+        menuCadastro.addSeparator();
         menuCadastro.add(itemCadastrarAluno);
         menuCadastro.addSeparator();
         menuCadastro.add(itemCadastrarNota);
@@ -145,6 +148,15 @@ public class TelaInicialFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+            }
+        });
+
+        //Manipulador de Eventos para o item Cadastrar Curso
+        itemCadastrarCurso.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new CadastrarCursoFrame().setVisible(true);
             }
         });
 
@@ -199,6 +211,15 @@ public class TelaInicialFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 new ConsultarCursoFrame().setVisible(true);
+            }
+        });
+
+        //Manipulador de Eventos para o botão Cadastrar Curso
+        btCadastrarCurso.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new CadastrarCursoFrame().setVisible(true);
             }
         });
 

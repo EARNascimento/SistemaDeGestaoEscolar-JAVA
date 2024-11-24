@@ -1,4 +1,6 @@
 package com.sge.telas;
 
-public class CadastrarCursoFrame {
+import javax.swing.*;
+
+public class CadastrarCursoFrame extends JFrame {
 }
