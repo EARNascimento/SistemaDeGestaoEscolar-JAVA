@@ -49,22 +49,22 @@ public class TelaInicialFrame extends JFrame {
         opcoes.setLayout(new GridLayout(0, 3, 25, 25)); // Mantém o espaçamento entre os botões
 
 // Botões
-        JButton cursoAnalise = new JButton("<html> Cursos </html>");
+        JButton btCursoAnalise = new JButton("<html> Cursos </html>");
         JButton cursoCiencia = new JButton("<html> Cadastrar Aluno </html>");
         JButton cursoEngenharia = new JButton("<html> Consultar Aluno </html>");
 
 // Centralizando o texto dentro dos botões
-        cursoAnalise.setHorizontalAlignment(SwingConstants.CENTER);
+        btCursoAnalise.setHorizontalAlignment(SwingConstants.CENTER);
         cursoCiencia.setHorizontalAlignment(SwingConstants.CENTER);
         cursoEngenharia.setHorizontalAlignment(SwingConstants.CENTER);
 
 // Adicionando o afastamento nas laterais dos botões
-        cursoAnalise.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
+        btCursoAnalise.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
         cursoCiencia.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
         cursoEngenharia.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50)); // 10 pixels de afastamento nas laterais
 
 // Adicionando os botões ao painel
-        opcoes.add(cursoAnalise);
+        opcoes.add(btCursoAnalise);
         opcoes.add(cursoCiencia);
         opcoes.add(cursoEngenharia);
 
@@ -190,7 +190,7 @@ public class TelaInicialFrame extends JFrame {
         });
 
         // Manipulador de Eventos para o botão Cadastrar Curso
-        cursoAnalise.addActionListener(new ActionListener() {
+        btCursoAnalise.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
@@ -221,7 +221,7 @@ public class TelaInicialFrame extends JFrame {
                 mais de 80 mil livros, centros esportivos, teatros, auditórios e mais de 100 laboratórios."""));
 
         // Tamanho dos botões
-        setButtonSize(cursoAnalise, cursoCiencia, cursoEngenharia);
+        setButtonSize(btCursoAnalise, cursoCiencia, cursoEngenharia);
 
         //Funçao dos Botões
         // Adicionando um MouseListener para trocar as frases quando o mouse passa por cima
