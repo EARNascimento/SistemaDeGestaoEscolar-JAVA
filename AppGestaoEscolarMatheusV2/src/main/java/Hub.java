@@ -377,6 +377,15 @@ public class Hub extends JFrame{
                 }
             });
 
+            //Manipulador de Eventos para o botão Cadastrar Curso
+            btCadastrarCurso.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new CadastrarCursoFrame().setVisible(true);
+                }
+            });
+
             // Manipulador de Eventos para o item Cadastrar Alunos
             itemCadastrarAluno.addActionListener(new ActionListener() {
                 @Override
@@ -428,15 +437,6 @@ public class Hub extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
                     new ConsultarCursoFrame().setVisible(true);
-                }
-            });
-
-            //Manipulador de Eventos para o botão Cadastrar Curso
-            btCadastrarCurso.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
-                    new CadastrarCursoFrame().setVisible(true);
                 }
             });
 
