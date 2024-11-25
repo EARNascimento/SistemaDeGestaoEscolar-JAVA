@@ -382,7 +382,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarAlunoFrameDois().setVisible(true);
+                    new CadastrarAlunoFrame().setVisible(true);
                 }
             });
 
@@ -391,7 +391,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarAlunoFrameDois().setVisible(true);
+                    new CadastrarAlunoFrame().setVisible(true);
                 }
             });
 
@@ -516,11 +516,11 @@ public class Hub extends JFrame{
         }
     }
 
-    class CadastrarAlunoFrameDois extends JFrame{
+    class CadastrarAlunoFrame extends JFrame{
         private JTextField nomeField, dataNascimentoField, emailField;
         private JButton cadastrar, cancelar;
 
-        public CadastrarAlunoFrameDois(){
+        public CadastrarAlunoFrame(){
             setTitle("Cadastro de Aluno");
             setSize(400, 300);
             setLocationRelativeTo(null);
