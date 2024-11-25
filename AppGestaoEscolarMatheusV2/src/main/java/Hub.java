@@ -382,7 +382,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarAlunoFrame().setVisible(true);
+                    new CadastrarAlunoFrameDois().setVisible(true);
                 }
             });
 
@@ -391,7 +391,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarAlunoFrame().setVisible(true);
+                    new CadastrarAlunoFrameDois().setVisible(true);
                 }
             });
 
@@ -504,6 +504,46 @@ public class Hub extends JFrame{
                     JOptionPane.showMessageDialog(null, "O curso: " + nome + " foi cadastrado!");
                 }
             });
+
+            // Manipulador de Eventos para o botão Cancelar
+            cancelar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
+        }
+    }
+
+    class CadastrarAlunoFrameDois extends JFrame{
+        private JTextField nomeField, dataNascimentoField, emailField;
+        private JButton cadastrar, cancelar;
+
+        public CadastrarAlunoFrameDois(){
+            setTitle("Cadastro de Aluno");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setLayout(new GridLayout(5, 2));
+
+            add(new JLabel("Nome:"));
+            nomeField = new JTextField();
+            add(nomeField);
+
+            add(new JLabel("Data de Nascimento:"));
+            dataNascimentoField = new JTextField();
+            add(dataNascimentoField);
+
+            add(new JLabel("Email:"));
+            emailField = new JTextField();
+            add(emailField);
+
+            cadastrar = new JButton("Cadastrar");
+            add(cadastrar);
+
+            cancelar = new JButton("Cancelar");
+            add(cancelar);
 
             // Manipulador de Eventos para o botão Cancelar
             cancelar.addActionListener(new ActionListener() {

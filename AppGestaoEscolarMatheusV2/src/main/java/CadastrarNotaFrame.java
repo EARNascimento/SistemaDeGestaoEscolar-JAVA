@@ -106,7 +106,7 @@ public class CadastrarNotaFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Aqui você pode fechar a janela atual e abrir a Tela Inicial
                 setVisible(false); // Fecha a janela atual
-                new TelaInicialFrame().setVisible(true); // Abre a Tela Inicial
+
             }
         });
 

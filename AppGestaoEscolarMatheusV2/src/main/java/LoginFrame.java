@@ -127,7 +127,7 @@ public class LoginFrame extends JFrame {
             //Validando o acesso
             if(acesso.getStatus() == true){
                 dispose(); // Fechando a tela de Login
-                new TelaInicialFrame().setVisible(true);
+
             } else {
                 //Incrementando o contador de tentativas
                 tentativas ++;

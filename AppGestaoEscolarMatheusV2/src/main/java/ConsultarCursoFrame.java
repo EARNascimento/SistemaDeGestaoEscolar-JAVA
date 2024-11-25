@@ -50,7 +50,6 @@ public class ConsultarCursoFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new TelaInicialFrame().setVisible(true);
             }
         });
     }

@@ -37,13 +37,9 @@ public class CadastrarAlunoFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                  setVisible(false);
-                new TelaInicialFrame().setVisible(true);
             }
         });
-        
-        
 
-        setVisible(true);
     }
 
     
