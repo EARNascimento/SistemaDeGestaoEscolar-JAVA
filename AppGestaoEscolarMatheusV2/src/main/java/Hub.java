@@ -75,6 +75,7 @@ public class Hub extends JFrame{
         add(centro, BorderLayout.CENTER);
 
     }
+
     //Tela de Login
     class Login extends JFrame {
         private String usuario;
@@ -114,10 +115,10 @@ public class Hub extends JFrame{
 
             //Cabeçalho
             JPanel cabecalho = new JPanel();
-            JLabel nomeEscola = new JLabel("UNILESTE");
+            JLabel nomeEscola = new JLabel("SGE - Login");
             nomeEscola.setFont(new Font("Swis721 Blk BT", Font.BOLD,36));
-            nomeEscola.setHorizontalAlignment(SwingConstants.LEFT);
-            cabecalho.setLayout(new FlowLayout(FlowLayout.LEFT));
+            nomeEscola.setHorizontalAlignment(SwingConstants.CENTER);
+            cabecalho.setLayout(new FlowLayout(FlowLayout.CENTER));
             cabecalho.add(nomeEscola);
 
             //Centro - Formulário de Login
@@ -240,8 +241,8 @@ public class Hub extends JFrame{
 
             // Criando o painel do cabeçalho com o nome Unileste
             JPanel cabecalho = new JPanel();
-            cabecalho.setLayout(new FlowLayout(FlowLayout.LEFT)); // Alinha o conteúdo à esquerda
-            JLabel unileste = new JLabel("UNILESTE");
+            cabecalho.setLayout(new FlowLayout(FlowLayout.CENTER)); // Alinha o conteúdo ao centro
+            JLabel unileste = new JLabel("SGE - Tela Inicial");
             unileste.setFont(new Font("Arial", Font.BOLD, 36));
             cabecalho.add(unileste); // Adiciona a label ao painel do cabeçalho
             add(cabecalho, BorderLayout.NORTH); // Adiciona o painel ao topo da janela
@@ -249,7 +250,7 @@ public class Hub extends JFrame{
             // Criando as frases que vão ser alternadas
             ArrayList<String> frases = new ArrayList<>();
             frases.add("Bem-vindo ao Sistema de Gestão Escolar!");
-            frases.add("Sistema Unileste - Inovação em Educação!");
+            frases.add("SGE - Inovação em Educação!");
             frases.add("Aqui, o conhecimento transforma o futuro.");
             frases.add("A educação é o passaporte para o futuro!");
 
@@ -437,7 +438,7 @@ public class Hub extends JFrame{
                     new CadastrarCursoFrame().setVisible(true);
                 }
             });
-            
+
             // Tamanho dos botões
             setButtonSize(btCursoAnalise, btCadastrarCurso, btCadastrarAluno, btConsultarAluno);
 
