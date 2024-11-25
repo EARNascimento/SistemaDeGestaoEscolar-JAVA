@@ -107,7 +107,7 @@ public class Hub extends JFrame{
 
         public Login(){
             //Configuração da Janela de Login
-            setTitle("Login");
+            setTitle("SGE - Login");
             setSize(500,400);
             setLocationRelativeTo(null);
             setResizable(false);
@@ -233,6 +233,7 @@ public class Hub extends JFrame{
         private JLabel frase;
 
         public MenuInicial(){
+            setTitle("SGE - Menu Inicial");
             setSize(800, 600);
             setLocationRelativeTo(null); // Centralizando a tela no sistema
             setResizable(false);
@@ -242,7 +243,7 @@ public class Hub extends JFrame{
             // Criando o painel do cabeçalho com o nome Unileste
             JPanel cabecalho = new JPanel();
             cabecalho.setLayout(new FlowLayout(FlowLayout.CENTER)); // Alinha o conteúdo ao centro
-            JLabel unileste = new JLabel("SGE - Tela Inicial");
+            JLabel unileste = new JLabel("SGE - Menu Inicial");
             unileste.setFont(new Font("Arial", Font.BOLD, 36));
             cabecalho.add(unileste); // Adiciona a label ao painel do cabeçalho
             add(cabecalho, BorderLayout.NORTH); // Adiciona o painel ao topo da janela
