@@ -320,7 +320,6 @@ public class Hub extends JFrame{
 
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
 
-            JMenuItem itemFaleConosco = new JMenuItem("Fale Conosco");
             JMenuItem itemSobreNos = new JMenuItem("Sobre Nós");
             JMenuItem itemSair = new JMenuItem("Sair");
 
@@ -340,7 +339,6 @@ public class Hub extends JFrame{
             // Adicionando os menus à barra de menus
             menuBar.add(menuCadastro);
             menuBar.add(menuConsulta);
-            menuBar.add(itemFaleConosco);
             menuBar.add(itemSobreNos);
 
             // Criando um espaço entre os menus à esquerda e o menu de logout à direita
@@ -441,17 +439,6 @@ public class Hub extends JFrame{
                     new CadastrarCursoFrame().setVisible(true);
                 }
             });
-
-            // Manipulador de Eventos para o item Fale Conosco
-            itemFaleConosco.addActionListener(e -> JOptionPane.showMessageDialog(null, """
-                Aluno: Matheus / RA: \n
-                E-mail: matheus1030br@gmail.com  \n
-                -------------------------------------------- \n
-                Aluno: Eduardo Alfredo Reis Nascimento / RA: \n
-                E-mail: eduardo.alfredo@a.unileste.edu.br \n
-                -------------------------------------------- \n
-                Aluno: Gabriel Camilo / RA: \n
-                E-mail:"""));
 
             // Manipulador de Eventos para o item Sobre Nós
             itemSobreNos.addActionListener(e -> JOptionPane.showMessageDialog(null, """
