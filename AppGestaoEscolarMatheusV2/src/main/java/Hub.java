@@ -373,7 +373,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarCursoFrame().setVisible(true);
+                    new CadastrarCursoFrameDois().setVisible(true);
                 }
             });
 
@@ -436,7 +436,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarCursoFrame().setVisible(true);
+                    new CadastrarCursoFrameDois().setVisible(true);
                 }
             });
 
@@ -466,6 +466,53 @@ public class Hub extends JFrame{
                 button.setFont(new Font("Arial", Font.PLAIN, 24)); // Definindo a fonte
                 button.setPreferredSize(new Dimension(100, 100)); // Definindo o tamanho do botão
             }
+        }
+    }
+
+    class CadastrarCursoFrameDois extends JFrame{
+        Curso curso;
+        public CadastrarCursoFrameDois(){
+            setTitle("Cadastro de Curso");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setLayout(new GridLayout(5, 2));
+
+            add(new JLabel("ID: "));
+            JTextField idFieldText = new JTextField();
+            add(idFieldText);
+
+            add(new JLabel("Nome do Curso :"));
+            JTextField nomeFieldText = new JTextField();
+            add(nomeFieldText);
+
+            JButton btCadastrar = new JButton("Cadastrar");
+            add(btCadastrar);
+
+            JButton cancelar = new JButton("Cancelar");
+            add(cancelar);
+
+            //Manipulador de Eventos para Cadastrar
+            btCadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String id = idFieldText.getText();
+                    String nome = nomeFieldText.getText();
+
+                    //Cadastra Curso
+                    utilitarios.setCurso(id, nome);
+                    JOptionPane.showMessageDialog(null, "O curso: " + nome + " foi cadastrado!");
+                }
+            });
+
+            // Manipulador de Eventos para o botão Cancelar
+            cancelar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
         }
     }
 }
