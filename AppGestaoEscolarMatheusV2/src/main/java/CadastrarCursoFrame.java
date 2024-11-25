@@ -1,8 +1,3 @@
-package com.sge.telas;
-
-import com.sge.util.Curso;
-import com.sge.util.Utilitarios;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

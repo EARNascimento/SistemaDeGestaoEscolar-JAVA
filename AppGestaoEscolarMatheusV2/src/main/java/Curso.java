@@ -1,5 +1,3 @@
-package com.sge.util;
-
 import java.util.ArrayList;
 import java.util.List;
 

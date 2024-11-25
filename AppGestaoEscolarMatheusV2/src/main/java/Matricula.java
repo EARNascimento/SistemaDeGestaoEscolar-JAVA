@@ -1,5 +1,3 @@
-package com.sge.util;
-
 public class Matricula {
 
     private Aluno aluno;

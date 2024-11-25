@@ -1,19 +1,16 @@
-package com.sge.telas;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 
-public class CadastrarNotaFrame extends JFrame {
+public class ConsultarAlunoFrame extends JFrame {
 
-    private JTextField notaIdField, alunoIdField; // Campo para nome do aluno
+    private JTextField alunoIdField; // Campo para nome do aluno
     private JButton consultar, cancelar;
     private JTextArea resultadoArea; // Área de texto para exibir resultados
 
-    public CadastrarNotaFrame() {
-        setTitle("Cadastrar Nota");
+    public ConsultarAlunoFrame() {
+        setTitle("Consultar Aluno");
         setSize(400, 450); // Aumentando o tamanho da janela para acomodar os novos componentes
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +30,7 @@ public class CadastrarNotaFrame extends JFrame {
         add(alunoIdField, gbc);
 
         // Botão Consultar
-        consultar = new JButton("Pesquisar");
+        consultar = new JButton("Consultar");
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE;
@@ -55,33 +52,20 @@ public class CadastrarNotaFrame extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         add(scrollPane, gbc);
 
-        //Inserir Nota
-        // Adicionando o campo para Nota
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.WEST;
-        add(new JLabel("Nota:"), gbc);
-        
-        
-        notaIdField = new JTextField(20); // Campo para Inserir Nota
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        add(notaIdField, gbc);
-        
-        
-        
-        // Botões adicionais
+        // Botões adicionais: Matricular, Alterar, Excluir
         JPanel painelBotoes = new JPanel();
         painelBotoes.setLayout(new GridLayout(1, 3, 10, 10)); // Layout para os botões de ação
 
-        JButton cadastrarButton = new JButton("Cadastrar Nota");
-        
-        painelBotoes.add(cadastrarButton);
-        
+        JButton matricularButton = new JButton("Matricular");
+        JButton alterarButton = new JButton("Alterar");
+        JButton excluirButton = new JButton("Excluir");
+
+        painelBotoes.add(matricularButton);
+        painelBotoes.add(alterarButton);
+        painelBotoes.add(excluirButton);
 
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(painelBotoes, gbc);
@@ -90,7 +74,7 @@ public class CadastrarNotaFrame extends JFrame {
         consultar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomeAluno = notaIdField.getText();
+                String nomeAluno = alunoIdField.getText();
                 if (!nomeAluno.isEmpty()) {
                     // Simulação de consulta ao banco de dados
                     resultadoArea.setText("Consultando informações do aluno: " + nomeAluno);
@@ -114,8 +98,9 @@ public class CadastrarNotaFrame extends JFrame {
         });
 
         // Configurando os manipuladores para os botões "Matricular", "Alterar", e "Excluir"
-        cadastrarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Matriculando aluno..."));
-
+        matricularButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Matriculando aluno..."));
+        alterarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Alterando dados do aluno..."));
+        excluirButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Excluindo aluno..."));
 
         // Exibir a janela
         setVisible(true);

@@ -1,5 +1,3 @@
-package com.sge.telas;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
