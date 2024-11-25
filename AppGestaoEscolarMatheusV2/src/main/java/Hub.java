@@ -373,7 +373,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarCursoFrameDois().setVisible(true);
+                    new CadastrarCursoFrame().setVisible(true);
                 }
             });
 
@@ -436,7 +436,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new CadastrarCursoFrameDois().setVisible(true);
+                    new CadastrarCursoFrame().setVisible(true);
                 }
             });
 
@@ -469,9 +469,9 @@ public class Hub extends JFrame{
         }
     }
 
-    class CadastrarCursoFrameDois extends JFrame{
+    class CadastrarCursoFrame extends JFrame{
         Curso curso;
-        public CadastrarCursoFrameDois(){
+        public CadastrarCursoFrame(){
             setTitle("Cadastro de Curso");
             setSize(400, 300);
             setLocationRelativeTo(null);
