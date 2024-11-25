@@ -441,7 +441,7 @@ public class Hub extends JFrame{
             });
 
             // Tamanho dos botões
-            setButtonSize(btCursoAnalise, btCadastrarCurso, btCadastrarAluno, btConsultarAluno);
+            setButtonSize(btCursoAnalise, btCadastrarCurso, btConsultarAluno, btCadastrarAluno);
 
             //Funçao dos Botões
             // Adicionando um MouseListener para trocar as frases quando o mouse passa por cima
