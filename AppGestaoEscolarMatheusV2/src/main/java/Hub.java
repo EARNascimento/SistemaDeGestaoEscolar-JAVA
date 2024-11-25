@@ -271,7 +271,7 @@ public class Hub extends JFrame{
             opcoes.setLayout(new GridLayout(2, 3, 25, 25)); // Mantém o espaçamento entre os botões
 
             // Botões
-            JButton btCursoAnalise = new JButton("<html> Cursos </html>");
+            JButton btCursoAnalise = new JButton("<html> Consultar Curso </html>");
             JButton btCadastrarCurso = new JButton("<html> Cadastrar Curso </html>");
             JButton btCadastrarAluno = new JButton("<html> Cadastrar Aluno </html>");
             JButton btConsultarAluno = new JButton("<html> Consultar Aluno </html>");
@@ -437,7 +437,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
-                    new ConsultarCursoFrameDois().setVisible(true);
+                    new ConsultarCursoFrame().setVisible(true);
                 }
             });
 
@@ -470,17 +470,17 @@ public class Hub extends JFrame{
         }
     }
 
-    class ConsultarCursoFrameDois extends JFrame{
+    class ConsultarCursoFrame extends JFrame{
         private JComboBox<String> cursoComboBox;
         private JTextArea resultadoArea;
         private JButton consultarButton;
         private JButton voltarButton;
 
-        public ConsultarCursoFrameDois(){
+        public ConsultarCursoFrame(){
             setTitle("Consultar Curso");
             setSize(600, 400);
             setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             setLayout(new BorderLayout(10, 10));
 
             JPanel painelSuperior = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -516,6 +516,7 @@ public class Hub extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
+                    new MenuInicial().setVisible(true);
                 }
             });
         }
@@ -541,7 +542,7 @@ public class Hub extends JFrame{
             }
         }
     }
-    
+
     class CadastrarCursoFrame extends JFrame{
         Curso curso;
         public CadastrarCursoFrame(){
