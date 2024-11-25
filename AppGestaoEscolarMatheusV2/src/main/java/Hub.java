@@ -320,7 +320,6 @@ public class Hub extends JFrame{
 
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
 
-            JMenuItem itemSobreNos = new JMenuItem("Sobre Nós");
             JMenuItem itemSair = new JMenuItem("Sair");
 
             // Adicionando os itens ao menu Cadastro
@@ -339,7 +338,6 @@ public class Hub extends JFrame{
             // Adicionando os menus à barra de menus
             menuBar.add(menuCadastro);
             menuBar.add(menuConsulta);
-            menuBar.add(itemSobreNos);
 
             // Criando um espaço entre os menus à esquerda e o menu de logout à direita
             menuBar.add(Box.createHorizontalGlue());
@@ -439,18 +437,7 @@ public class Hub extends JFrame{
                     new CadastrarCursoFrame().setVisible(true);
                 }
             });
-
-            // Manipulador de Eventos para o item Sobre Nós
-            itemSobreNos.addActionListener(e -> JOptionPane.showMessageDialog(null, """
-                O Centro Universitário Católica do Leste de Minas Gerais Unileste,
-                fundado em 1969 pela Congregação Padres do Trabalho, uma das principais
-                instituições de ensino superior da região do Vale do Aço e uma das mais
-                reconhecidas de Minas Gerais. Com mais de 20 cursos de graduação e diversas
-                opções de pós-graduação, a instituição já formou mais de seis mil profissionais
-                nos últimos cinco anos. Com dois campi (em Coronel Fabriciano e Ipatinga), oferece
-                infraestrutura de ponta, incluindo um parque tecnológico atualizado, biblioteca com
-                mais de 80 mil livros, centros esportivos, teatros, auditórios e mais de 100 laboratórios."""));
-
+            
             // Tamanho dos botões
             setButtonSize(btCursoAnalise, btCadastrarCurso, btCadastrarAluno, btConsultarAluno);
 
