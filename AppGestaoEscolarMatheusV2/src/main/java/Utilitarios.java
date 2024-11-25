@@ -15,7 +15,6 @@ public class Utilitarios {
 
     //Utilitários Curso
 
-
     public List<Curso> getCursos() {
         return cursos;
     }
@@ -31,6 +30,40 @@ public class Utilitarios {
         return novoCurso;
     }
 
+    //Utilitários Aluno
+
+    public void setAluno(String id, String nome, String dataNascimento, String email){
+        Aluno novoAluno = new Aluno(id, nome, dataNascimento, email);
+        //Verifica se o Aluno já existe;
+        if(!alunos.contains(novoAluno)){
+            alunos.add(novoAluno);
+            JOptionPane.showMessageDialog(null, " O aluno " + nome + " foi cadastrado com sucesso!");
+        } else{
+            JOptionPane.showMessageDialog(null, "O aluno " + nome + " já existe!");
+        }
+    }
+
+    public Aluno procuraAluno(String id){
+        boolean encontrei = false;
+        Aluno result = null;
+
+        //Percorre por alunos em busca de algum com o ID fornecido
+        for(Aluno aluno : alunos){
+            if(aluno.getId().equals(id)){
+                result = aluno;
+                encontrei = true;
+                break;
+            }
+        }
+        if (!encontrei){
+            JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
+            throw new RuntimeException("Aluno não encontrado");
+        }
+        return result;
+    }
+
+
+    //Utilitários Load de Arquivos
     public void carregarPreCadastro() {
         //Neste método, é realizado a leitura do arquivo preCadastro.txt
         Curso curso;

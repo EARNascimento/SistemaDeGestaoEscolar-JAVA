@@ -582,17 +582,21 @@ public class Hub extends JFrame{
         private JButton cadastrar, cancelar;
 
         public CadastrarAlunoFrame(){
-            setTitle("Cadastro de Aluno");
+            setTitle("SGE - Cadastro de Aluno");
             setSize(400, 300);
             setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLayout(new GridLayout(5, 2));
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridLayout(6, 2));
+
+            add(new JLabel("ID do Aluno"));
+            JTextField idFieldText = new JTextField();
+            add(idFieldText);
 
             add(new JLabel("Nome:"));
             nomeField = new JTextField();
             add(nomeField);
 
-            add(new JLabel("Data de Nascimento:"));
+            add(new JLabel("Data de Nascimento: (dd/mm/aaaa"));
             dataNascimentoField = new JTextField();
             add(dataNascimentoField);
 
@@ -605,6 +609,19 @@ public class Hub extends JFrame{
 
             cancelar = new JButton("Cancelar");
             add(cancelar);
+
+            cadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //Obtém as informações digitadas nos Fields
+                    String id = idFieldText.getText();
+                    String nome = nomeField.getText();
+                    String dataNascimento =  dataNascimentoField.getText();
+                    String email = emailField.getText();
+
+                    utilitarios.setAluno(id, nome, dataNascimento, email);
+                }
+            });
 
             // Manipulador de Eventos para o botão Cancelar
             cancelar.addActionListener(new ActionListener() {
@@ -634,7 +651,7 @@ public class Hub extends JFrame{
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.WEST;
-            add(new JLabel("Nome do Aluno:"), gbc);
+            add(new JLabel("ID do Aluno:"), gbc);
 
             alunoIdField = new JTextField(20); // Campo para nome do aluno
             gbc.gridx = 1;
@@ -687,25 +704,27 @@ public class Hub extends JFrame{
             consultar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String nomeAluno = alunoIdField.getText();
-                    if (!nomeAluno.isEmpty()) {
-                        // Simulação de consulta ao banco de dados
-                        resultadoArea.setText("Consultando informações do aluno: " + nomeAluno);
-                        // Aqui você faria a busca no banco de dados, por exemplo:
-                        // String resultado = consultarAlunoNoBanco(nomeAluno);
-                        // resultadoArea.setText(resultado);
+                    String idAluno = alunoIdField.getText();
+                    if (!idAluno.isEmpty()) {
+                        Aluno alunoEncontrado = utilitarios.procuraAluno(idAluno);
+                        resultadoArea.setText("Consultando informações do aluno: " + alunoEncontrado.getNome() + "\n" +
+                        "ID: " + alunoEncontrado.getId() + "\n" +
+                        "Nome: " + alunoEncontrado.getNome() + "\n" +
+                        "Data Nascimento: "  + alunoEncontrado.getDataNascimento() + "\n" +
+                        "E-mail: " + alunoEncontrado.getEmail());
                     } else {
-                        resultadoArea.setText("Por favor, insira o nome do aluno.");
+                        resultadoArea.setText("Por favor, insira o ID do Aluno");
                     }
                 }
             });
 
+            //Criando um método para consultar o ID fornecido
             // Manipulador de eventos para o botão Cancelar
             cancelar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Aqui você pode fechar a janela atual e abrir a Tela Inicial
                     setVisible(false); // Fecha a janela atual
+                    new MenuInicial().setVisible(true);
                 }
             });
 

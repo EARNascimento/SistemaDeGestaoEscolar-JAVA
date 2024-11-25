@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Aluno {
@@ -6,15 +8,57 @@ public class Aluno {
     private String email;
     private final String id;
 
-    public Aluno(String nome, String dataNascimento, String email, String id ){
+    List<Curso> cursos = new ArrayList<>();
+
+    //Construtor
+    public Aluno(String id, String nome, String dataNascimento, String email){
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.id = id;
     }
 
+    //Getters
     public String getId(){
         return id;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public String getDataNascimento(){
+        return dataNascimento;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public List<Curso> getCursos(){
+        return cursos;
+    }
+
+    //Setters
+
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
+    public void setDataNascimento(String dataNascimento){
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public void addCurso(Curso curso){
+        cursos.add(curso);
+    }
+
+    public void removeCurso(Curso curso){
+        cursos.remove(curso);
     }
 
     //Verificar se o ID está sendo usado
