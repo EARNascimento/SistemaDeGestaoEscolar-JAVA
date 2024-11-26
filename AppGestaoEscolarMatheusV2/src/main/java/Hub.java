@@ -449,6 +449,7 @@ public class Hub extends JFrame{
                 }
             });
 
+            //Manipulador de Eventos para o item Consultar Curso
             itemConsultarCurso.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -466,6 +467,7 @@ public class Hub extends JFrame{
                 }
             });
 
+            //Manipulador de Eventos para o item Consultar Matricula
             itemConsultarMatricula.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1017,8 +1019,8 @@ public class Hub extends JFrame{
             JPanel painelBotoes = new JPanel();
             painelBotoes.setLayout(new GridLayout(1, 3, 10, 10)); // Layout para os botões de ação
 
-            JButton alterarButton = new JButton("Alterar");
-            JButton excluirButton = new JButton("Excluir");
+            JButton alterarButton = new JButton("Alterar Curso");
+            JButton excluirButton = new JButton("Desmatricular Aluno");
 
             painelBotoes.add(alterarButton);
             painelBotoes.add(excluirButton);
@@ -1049,7 +1051,25 @@ public class Hub extends JFrame{
                 }
             });
 
-            //Criando um método para consultar o ID fornecido
+            //Manipulador de Eventos para o botão Alterar Curso
+            alterarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new AlterarMatricula().setVisible(true);
+                }
+            });
+
+            //Manipulador de Eventos para o botão Desmatricular Aluno
+            excluirButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String id = matriculaIdField.getText();
+                    Matricula matricula = utilitarios.procuraMatricula(id);
+                    utilitarios.desMatricula(matricula);
+                }
+            });
+
             // Manipulador de eventos para o botão Cancelar
             voltar.addActionListener(new ActionListener() {
                 @Override
@@ -1061,6 +1081,63 @@ public class Hub extends JFrame{
 
         }
     }
+
+    class AlterarMatricula extends JFrame{
+        private JComboBox<Curso> cursoComboBox;
+
+        public AlterarMatricula(){
+            setTitle("SGE - Alterar o Curso da Matrícula");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridLayout(5, 2));
+            cursoComboBox = new JComboBox<>();
+
+            //Adiciona todos os cursos consultados
+            for(Curso curso : utilitarios.getCursos()){
+                this.cursoComboBox.addItem(curso);
+            }
+            //Adicionar uma ComboBox aqui!
+            add(new JLabel("Selecione o novo curso: "));
+            add(cursoComboBox);
+
+            add(new JLabel("ID da Matrícula  :"));
+            JTextField idFieldText = new JTextField();
+            add(idFieldText);
+
+            JButton btCadastrar = new JButton("Alterar");
+            add(btCadastrar);
+
+            JButton voltar = new JButton("Voltar");
+            add(voltar);
+
+            //Manipulador de Eventos para Cadastrar
+            btCadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Curso novoCurso = (Curso) cursoComboBox.getSelectedItem();
+                    String novoCursoNome = novoCurso.getName();
+                    String id = idFieldText.getText();
+
+                    Matricula matriculaInformada = utilitarios.procuraMatricula(id);
+
+                    //Cadastra Curso
+                    utilitarios.alterarCursoMatricula(matriculaInformada, novoCurso);
+                    JOptionPane.showMessageDialog(null, "O curso: " + novoCursoNome + " foi atualizado!");
+                }
+            });
+
+            // Manipulador de Eventos para o botão Cancelar
+            voltar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
+        }
+    }
+    
 }
 
 

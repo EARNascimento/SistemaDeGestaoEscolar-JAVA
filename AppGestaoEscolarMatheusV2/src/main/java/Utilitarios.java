@@ -101,6 +101,21 @@ public class Utilitarios {
         return result;
     }
 
+    public void alterarCursoMatricula(Matricula matricula, Curso curso){
+        matricula.setCurso(curso);
+    }
+
+    public void desMatricula(Matricula matricula){
+        matricula.setCurso(null);
+        matricula.setStatus(false);
+        matricula.setAnoLetivo(null);
+
+        Aluno alunoMatriculado = matricula.getAluno();
+
+        JOptionPane.showMessageDialog(null, "O aluno " + alunoMatriculado.getNome() + " foi desmatriculado!");
+        JOptionPane.showMessageDialog(null, "O ID de Matrícula: " + matricula.getId() + " foi desativado!");
+    }
+
     //Utilitários Load de Arquivos
     public void carregarPreCadastro() {
         //Neste método, é realizado a leitura do arquivo preCadastro.txt
