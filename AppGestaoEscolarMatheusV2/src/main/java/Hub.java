@@ -320,6 +320,7 @@ public class Hub extends JFrame{
             JMenuItem itemCadastrarAluno = new JMenuItem("Cadastrar Aluno");
             JMenuItem itemCadastrarNota = new JMenuItem("Cadastrar Nota");
 
+            JMenuItem itemConsultarCurso = new JMenuItem("Consultar Curso");
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
 
             JMenuItem itemSair = new JMenuItem("Sair");
@@ -332,6 +333,8 @@ public class Hub extends JFrame{
             menuCadastro.add(itemCadastrarNota);
 
             // Adicionando os itens ao menu Consulta
+            menuConsulta.add(itemConsultarCurso);
+            menuConsulta.addSeparator();
             menuConsulta.add(itemConsultarAluno);
 
             // Adicionando o item Sair ao menu Logout
@@ -428,6 +431,14 @@ public class Hub extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
                     new ConsultarAlunoFrame().setVisible(true);
+                }
+            });
+
+            itemConsultarCurso.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new ConsultarCursoFrame().setVisible(true);
                 }
             });
 
@@ -843,6 +854,12 @@ public class Hub extends JFrame{
 
             // Configurando os manipuladores para os botões "Matricular", "Alterar", e "Excluir"
             cadastrarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Matriculando aluno..."));
+
+        }
+    }
+
+    class MatricularAlunoFrame extends JFrame{
+        public MatricularAlunoFrame(){
 
         }
     }
