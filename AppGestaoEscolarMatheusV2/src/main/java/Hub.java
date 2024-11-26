@@ -859,8 +859,53 @@ public class Hub extends JFrame{
     }
 
     class MatricularAlunoFrame extends JFrame{
-        public MatricularAlunoFrame(){
+        private JTextField anoLetivoField;
+        private JButton cadastrar, voltar;
 
+        public MatricularAlunoFrame(){
+            setTitle("SGE - Matricular Aluno");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridLayout(6, 2));
+
+            JLabel nomeEscola = new JLabel("SGE - Matricular Aluno", SwingConstants.CENTER);
+            nomeEscola.setFont(new Font("Swis721 Blk BT", Font.BOLD,22));
+            add(nomeEscola, BorderLayout.NORTH);
+
+            add(new JLabel("ID da Matrícula: "));
+            JTextField idFieldText = new JTextField();
+            add(idFieldText);
+
+            add(new JLabel("Ano Letivo: (dd/mm/aaaa"));
+            anoLetivoField = new JTextField();
+            add(anoLetivoField);
+
+            cadastrar = new JButton("Matricular");
+            add(cadastrar);
+
+            voltar = new JButton("Voltar");
+            add(voltar);
+
+            cadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //Obtém as informações digitadas nos Fields
+                    String id = idFieldText.getText();
+                    String anoLetivo =  anoLetivoField.getText();
+
+                    utilitarios.setMatricula(id, anoLetivo);
+                }
+            });
+
+            // Manipulador de Eventos para o botão Cancelar
+            voltar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
         }
     }
 }

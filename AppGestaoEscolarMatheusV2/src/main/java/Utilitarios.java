@@ -8,6 +8,7 @@ import java.util.List;
 public class Utilitarios {
     private List<Curso> cursos = new ArrayList<>();
     private List<Aluno> alunos = new ArrayList<>();
+    private List<Matricula> matriculas = new ArrayList<>();
 
     public Utilitarios() {
 
@@ -62,6 +63,23 @@ public class Utilitarios {
         return result;
     }
 
+    //Utilitários Matricula
+
+    public List<Matricula> getMatriculas(){
+        return matriculas;
+    }
+
+    public void setMatricula(String id, String anoLetivo){
+        Matricula novaMatricula = new Matricula(id, anoLetivo);
+        //Verifica se a Matrícula já existe;
+        if(!matriculas.contains(novaMatricula)){
+            matriculas.add(novaMatricula);
+            novaMatricula.setStatus(true);
+            JOptionPane.showMessageDialog(null, "A matrícula: " + id + " foi cadastrada com sucesso!");
+        } else{
+            JOptionPane.showMessageDialog(null, "A matrícula: " + id + " já existe!");
+        }
+    }
 
     //Utilitários Load de Arquivos
     public void carregarPreCadastro() {
