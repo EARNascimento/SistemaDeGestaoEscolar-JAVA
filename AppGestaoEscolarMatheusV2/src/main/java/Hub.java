@@ -740,7 +740,13 @@ public class Hub extends JFrame{
             });
 
             // Configurando os manipuladores para os botões "Matricular", "Alterar", e "Excluir"
-            matricularButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Matriculando aluno..."));
+            matricularButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MatricularAlunoFrame().setVisible(true);
+                }
+            });
             alterarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Alterando dados do aluno..."));
             excluirButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Excluindo aluno..."));
 
@@ -861,40 +867,67 @@ public class Hub extends JFrame{
     class MatricularAlunoFrame extends JFrame{
         private JTextField anoLetivoField;
         private JButton cadastrar, voltar;
+        private JComboBox<Curso> cursoComboBox;
 
         public MatricularAlunoFrame(){
             setTitle("SGE - Matricular Aluno");
-            setSize(400, 300);
+            setSize(500, 300);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            setLayout(new GridLayout(6, 2));
+            setLayout(new BorderLayout());
+            cursoComboBox = new JComboBox<>();
 
+            //Adiciona os cursos ao comboBox
+            for(Curso curso : utilitarios.getCursos()){
+                this.cursoComboBox.addItem(curso);
+            }
+
+            JPanel cabecalho = new JPanel();
+            cabecalho.setLayout(new FlowLayout(FlowLayout.CENTER));
             JLabel nomeEscola = new JLabel("SGE - Matricular Aluno", SwingConstants.CENTER);
             nomeEscola.setFont(new Font("Swis721 Blk BT", Font.BOLD,22));
-            add(nomeEscola, BorderLayout.NORTH);
+            cabecalho.add(nomeEscola);
+            add(cabecalho, BorderLayout.NORTH);
 
-            add(new JLabel("ID da Matrícula: "));
+            //Painel Central
+            JPanel centro = new JPanel();
+            centro.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+            centro.setLayout(new GridLayout(6,2));
+            add(centro);
+
+            centro.add(new JLabel("ID do Aluno"));
+            JTextField idAlunoFieldText = new JTextField();
+            centro.add(idAlunoFieldText);
+
+            centro.add(new JLabel("ID da Matrícula: "));
             JTextField idFieldText = new JTextField();
-            add(idFieldText);
+            centro.add(idFieldText);
 
-            add(new JLabel("Ano Letivo: (dd/mm/aaaa"));
+            centro.add(new JLabel("Ano Letivo: "));
             anoLetivoField = new JTextField();
-            add(anoLetivoField);
+            centro.add(anoLetivoField);
 
-            cadastrar = new JButton("Matricular");
-            add(cadastrar);
+            centro.add(new JLabel("Selecione o Curso: "));
+            centro.add(cursoComboBox);
 
-            voltar = new JButton("Voltar");
-            add(voltar);
+            centro.add(cadastrar = new JButton("Matricular"));
+            centro.add(cadastrar);
+
+            centro.add(voltar = new JButton("Voltar"));
+            centro.add(voltar);
 
             cadastrar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     //Obtém as informações digitadas nos Fields
+                    String idAluno = idAlunoFieldText.getText();
                     String id = idFieldText.getText();
                     String anoLetivo =  anoLetivoField.getText();
 
-                    utilitarios.setMatricula(id, anoLetivo);
+                    Curso cursoSelecionado = (Curso) cursoComboBox.getSelectedItem();
+                    Aluno alunoSelecionado = utilitarios.procuraAluno(idAluno);
+
+                    utilitarios.setMatricula(id, alunoSelecionado, anoLetivo, cursoSelecionado);
                 }
             });
 

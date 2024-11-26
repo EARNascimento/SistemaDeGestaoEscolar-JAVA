@@ -69,8 +69,8 @@ public class Utilitarios {
         return matriculas;
     }
 
-    public void setMatricula(String id, String anoLetivo){
-        Matricula novaMatricula = new Matricula(id, anoLetivo);
+    public void setMatricula(String id, Aluno aluno, String anoLetivo, Curso curso){
+        Matricula novaMatricula = new Matricula(id, aluno, anoLetivo, curso);
         //Verifica se a Matrícula já existe;
         if(!matriculas.contains(novaMatricula)){
             matriculas.add(novaMatricula);
