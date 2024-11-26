@@ -237,7 +237,7 @@ public class Hub extends JFrame{
             setSize(800, 600);
             setLocationRelativeTo(null); // Centralizando a tela no sistema
             setResizable(false);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             setLayout(new BorderLayout());
 
             // Criando o painel do cabeçalho com o nome Unileste
@@ -547,7 +547,7 @@ public class Hub extends JFrame{
             setTitle("Cadastro de Curso");
             setSize(400, 300);
             setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             setLayout(new GridLayout(5, 2));
 
             add(new JLabel("ID: "));
@@ -561,8 +561,8 @@ public class Hub extends JFrame{
             JButton btCadastrar = new JButton("Cadastrar");
             add(btCadastrar);
 
-            JButton cancelar = new JButton("Cancelar");
-            add(cancelar);
+            JButton voltar = new JButton("Voltar");
+            add(voltar);
 
             //Manipulador de Eventos para Cadastrar
             btCadastrar.addActionListener(new ActionListener() {
@@ -578,7 +578,7 @@ public class Hub extends JFrame{
             });
 
             // Manipulador de Eventos para o botão Cancelar
-            cancelar.addActionListener(new ActionListener() {
+            voltar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
@@ -590,7 +590,7 @@ public class Hub extends JFrame{
 
     class CadastrarAlunoFrame extends JFrame{
         private JTextField nomeField, dataNascimentoField, emailField;
-        private JButton cadastrar, cancelar;
+        private JButton cadastrar, voltar;
 
         public CadastrarAlunoFrame(){
             setTitle("SGE - Cadastro de Aluno");
@@ -618,8 +618,8 @@ public class Hub extends JFrame{
             cadastrar = new JButton("Cadastrar");
             add(cadastrar);
 
-            cancelar = new JButton("Cancelar");
-            add(cancelar);
+            voltar = new JButton("Voltar");
+            add(voltar);
 
             cadastrar.addActionListener(new ActionListener() {
                 @Override
@@ -635,7 +635,7 @@ public class Hub extends JFrame{
             });
 
             // Manipulador de Eventos para o botão Cancelar
-            cancelar.addActionListener(new ActionListener() {
+            voltar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
@@ -647,14 +647,14 @@ public class Hub extends JFrame{
 
     class ConsultarAlunoFrame extends JFrame{
         private JTextField alunoIdField; // Campo para nome do aluno
-        private JButton consultar, cancelar;
+        private JButton consultar, voltar;
         private JTextArea resultadoArea; // Área de texto para exibir resultados
 
         public ConsultarAlunoFrame(){
             setTitle("Consultar Aluno");
             setSize(400, 450); // Aumentando o tamanho da janela para acomodar os novos componentes
             setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             setLayout(new GridBagLayout()); // Usando GridBagLayout para melhor controle de posicionamento
             GridBagConstraints gbc = new GridBagConstraints(); // Constraints para posicionamento flexível
 
@@ -678,10 +678,10 @@ public class Hub extends JFrame{
             add(consultar, gbc);
 
             // Botão Cancelar
-            cancelar = new JButton("Cancelar");
+            voltar = new JButton("Voltar");
             gbc.gridx = 1;
             gbc.gridy = 1;
-            add(cancelar, gbc);
+            add(voltar, gbc);
 
             // Área de texto para mostrar o resultado
             resultadoArea = new JTextArea(10, 30);
@@ -731,7 +731,7 @@ public class Hub extends JFrame{
 
             //Criando um método para consultar o ID fornecido
             // Manipulador de eventos para o botão Cancelar
-            cancelar.addActionListener(new ActionListener() {
+            voltar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false); // Fecha a janela atual
@@ -749,14 +749,14 @@ public class Hub extends JFrame{
 
     class CadastrarNotaFrame extends JFrame{
         private JTextField notaIdField, alunoIdField; // Campo para nome do aluno
-        private JButton consultar, cancelar;
+        private JButton consultar, voltar;
         private JTextArea resultadoArea; // Área de texto para exibir resultados
 
         public CadastrarNotaFrame(){
             setTitle("Cadastrar Nota");
             setSize(400, 450); // Aumentando o tamanho da janela para acomodar os novos componentes
             setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             setLayout(new GridBagLayout()); // Usando GridBagLayout para melhor controle de posicionamento
             GridBagConstraints gbc = new GridBagConstraints(); // Constraints para posicionamento flexível
 
@@ -780,10 +780,10 @@ public class Hub extends JFrame{
             add(consultar, gbc);
 
             // Botão Cancelar
-            cancelar = new JButton("Cancelar");
+            voltar = new JButton("Voltar");
             gbc.gridx = 1;
             gbc.gridy = 1;
-            add(cancelar, gbc);
+            add(voltar, gbc);
 
             // Área de texto para mostrar o resultado
             resultadoArea = new JTextArea(10, 30);
@@ -843,7 +843,7 @@ public class Hub extends JFrame{
             });
 
             // Manipulador de eventos para o botão Cancelar
-            cancelar.addActionListener(new ActionListener() {
+            voltar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Aqui você pode fechar a janela atual e abrir a Tela Inicial
