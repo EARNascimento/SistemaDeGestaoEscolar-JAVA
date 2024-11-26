@@ -74,11 +74,31 @@ public class Utilitarios {
         //Verifica se a Matrícula já existe;
         if(!matriculas.contains(novaMatricula)){
             matriculas.add(novaMatricula);
+            aluno.setIdMatricula(id);
             novaMatricula.setStatus(true);
             JOptionPane.showMessageDialog(null, "A matrícula: " + id + " foi cadastrada com sucesso!");
         } else{
             JOptionPane.showMessageDialog(null, "A matrícula: " + id + " já existe!");
         }
+    }
+
+    public Matricula procuraMatricula(String id){
+        boolean encontrei = false;
+        Matricula result = null;
+
+        //Percorre por Matrículas em busca de algum com o ID fornecido
+        for(Matricula matricula : matriculas){
+            if(matricula.getId().equals(id)){
+                result = matricula;
+                encontrei = true;
+                break;
+            }
+        }
+        if(!encontrei){
+            JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
+            throw new RuntimeException(("Aluno não encontrado!"));
+        }
+        return result;
     }
 
     //Utilitários Load de Arquivos

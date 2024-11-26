@@ -318,10 +318,12 @@ public class Hub extends JFrame{
             // Criando os itens do Menu
             JMenuItem itemCadastrarCurso = new JMenuItem("Cadastrar Curso");
             JMenuItem itemCadastrarAluno = new JMenuItem("Cadastrar Aluno");
+            JMenuItem itemMatricularAluno = new JMenuItem("Matricular Aluno");
             JMenuItem itemCadastrarNota = new JMenuItem("Cadastrar Nota");
 
             JMenuItem itemConsultarCurso = new JMenuItem("Consultar Curso");
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
+            JMenuItem itemConsultarMatricula = new JMenuItem("Consultar Matricula");
 
             JMenuItem itemSair = new JMenuItem("Sair");
 
@@ -330,12 +332,16 @@ public class Hub extends JFrame{
             menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarAluno);
             menuCadastro.addSeparator();
+            menuCadastro.add(itemMatricularAluno);
+            menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarNota);
 
             // Adicionando os itens ao menu Consulta
             menuConsulta.add(itemConsultarCurso);
             menuConsulta.addSeparator();
             menuConsulta.add(itemConsultarAluno);
+            menuConsulta.addSeparator();
+            menuConsulta.add(itemConsultarMatricula);
 
             // Adicionando o item Sair ao menu Logout
             menuLogout.add(itemSair);
@@ -407,6 +413,15 @@ public class Hub extends JFrame{
                 }
             });
 
+            //Manipulador de Eventos para o botão itemMatricularAluno
+            itemMatricularAluno.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MatricularAlunoFrame().setVisible(true);
+                }
+            });
+
             // Manipulador de Eventos para o botão Cadastrar Notas
             itemCadastrarNota.addActionListener(new ActionListener() {
                 @Override
@@ -448,6 +463,14 @@ public class Hub extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
                     new ConsultarCursoFrame().setVisible(true);
+                }
+            });
+
+            itemConsultarMatricula.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new ConsultarMatriculaFrame().setVisible(true);
                 }
             });
 
@@ -939,6 +962,103 @@ public class Hub extends JFrame{
                     new MenuInicial().setVisible(true);
                 }
             });
+        }
+    }
+
+    class ConsultarMatriculaFrame extends JFrame{
+        private JTextField matriculaIdField; // Campo para nome do aluno
+        private JButton consultar, voltar;
+        private JTextArea resultadoArea; // Área de texto para exibir resultados
+
+        public ConsultarMatriculaFrame(){
+            setTitle("SGE - Consultar Matrícula");
+            setSize(400, 450); // Aumentando o tamanho da janela para acomodar os novos componentes
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridBagLayout()); // Usando GridBagLayout para melhor controle de posicionamento
+            GridBagConstraints gbc = new GridBagConstraints(); // Constraints para posicionamento flexível
+
+            // Adicionando o campo para pesquisa por nome
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            add(new JLabel("ID da Matrícula:"), gbc);
+
+            matriculaIdField = new JTextField(20); // Campo para o ID da matrícula
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            add(matriculaIdField, gbc);
+
+            // Botão Consultar
+            consultar = new JButton("Consultar");
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.fill = GridBagConstraints.NONE;
+            add(consultar, gbc);
+
+            // Botão Cancelar
+            voltar = new JButton("Voltar");
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            add(voltar, gbc);
+
+            // Área de texto para mostrar o resultado
+            resultadoArea = new JTextArea(10, 30);
+            resultadoArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(resultadoArea);
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            gbc.gridwidth = 2;
+            gbc.fill = GridBagConstraints.BOTH;
+            add(scrollPane, gbc);
+
+            // Botões adicionais: Matricular, Alterar, Excluir
+            JPanel painelBotoes = new JPanel();
+            painelBotoes.setLayout(new GridLayout(1, 3, 10, 10)); // Layout para os botões de ação
+
+            JButton alterarButton = new JButton("Alterar");
+            JButton excluirButton = new JButton("Excluir");
+
+            painelBotoes.add(alterarButton);
+            painelBotoes.add(excluirButton);
+
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.gridwidth = 2;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            add(painelBotoes, gbc);
+
+            // Manipulador de eventos para o botão Consultar
+            consultar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String idMatricula = matriculaIdField.getText();
+                    if (!idMatricula.isEmpty()) {
+                        Matricula matriculaEncontrada = utilitarios.procuraMatricula(idMatricula);
+                        Aluno alunoEncontrado = matriculaEncontrada.getAluno();
+                        Curso cursoEncontrado = matriculaEncontrada.getCurso();
+                        resultadoArea.setText("Consultando informações da Matrícula: " + matriculaEncontrada.getId() + "\n" +
+                                "Aluno: " + alunoEncontrado.getNome() + "\n" +
+                                "Curso matriculado: " + cursoEncontrado.getName() + "\n" +
+                                "Ano letivo: "  + matriculaEncontrada.getAnoLetivo() + "\n" +
+                                "Status da matrícula: " + matriculaEncontrada.getStatus());
+                    } else {
+                        resultadoArea.setText("Por favor, insira o ID da Matrícula");
+                    }
+                }
+            });
+
+            //Criando um método para consultar o ID fornecido
+            // Manipulador de eventos para o botão Cancelar
+            voltar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false); // Fecha a janela atual
+                    new MenuInicial().setVisible(true);
+                }
+            });
+
         }
     }
 }

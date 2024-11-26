@@ -7,6 +7,7 @@ public class Aluno {
     private String dataNascimento;
     private String email;
     private final String id;
+    private String idMatricula;
 
     List<Curso> cursos = new ArrayList<>();
 
@@ -59,6 +60,10 @@ public class Aluno {
 
     public void removeCurso(Curso curso){
         cursos.remove(curso);
+    }
+
+    public void setIdMatricula(String idMatricula){
+        this.idMatricula = idMatricula;
     }
 
     //Verificar se o ID está sendo usado
