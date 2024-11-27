@@ -322,7 +322,6 @@ public class Hub extends JFrame{
             JMenuItem itemAlterarCurso = new JMenuItem("Alterar Curso");
             JMenuItem itemAlterarAluno = new JMenuItem("Alterar Aluno");
             JMenuItem itemMatricularAluno = new JMenuItem("Matricular Aluno");
-            JMenuItem itemCadastrarNota = new JMenuItem("Cadastrar Nota");
             JMenuItem itemConsultarCurso = new JMenuItem("Consultar Curso");
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
             JMenuItem itemConsultarMatricula = new JMenuItem("Consultar Matricula");
@@ -341,8 +340,6 @@ public class Hub extends JFrame{
             menuCadastro.add(itemAlterarAluno);
             menuCadastro.addSeparator();
             menuCadastro.add(itemMatricularAluno);
-            menuCadastro.addSeparator();
-            menuCadastro.add(itemCadastrarNota);
             menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarDisciplina);
             menuCadastro.addSeparator();
