@@ -103,7 +103,7 @@ public class Utilitarios {
         //Verifica se a Matrícula já existe;
         if(!matriculas.contains(novaMatricula)){
             matriculas.add(novaMatricula);
-            aluno.setIdMatricula(id);
+            aluno.setMatricula(novaMatricula);
             novaMatricula.setStatus(true);
             JOptionPane.showMessageDialog(null, "A matrícula: " + id + " foi cadastrada com sucesso!");
         } else{
@@ -151,8 +151,8 @@ public class Utilitarios {
         return disciplinas;
     }
 
-    public void setDisciplina(String id, String nome, Nota nota){
-        Disciplina novaDisciplina = new Disciplina(id, nome, nota);
+    public void setDisciplina(String id, String nome){
+        Disciplina novaDisciplina = new Disciplina(id, nome);
         if(!disciplinas.contains(novaDisciplina)){
             disciplinas.add(novaDisciplina);
             JOptionPane.showMessageDialog(null, "A disciplina: " + id + " foi cadastrada com sucesso!");
@@ -178,6 +178,8 @@ public class Utilitarios {
         }
         return result;
     }
+
+    //Utilitarios Nota
 
     //Utilitários Load de Arquivos
     public void carregarPreCadastro() {

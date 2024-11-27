@@ -7,8 +7,9 @@ public class Aluno {
     private String dataNascimento;
     private String email;
     private final String id;
-    private String idMatricula;
-
+    private Matricula matricula;
+    private Curso curso;
+    private List<Nota> notas = new ArrayList<>();
     List<Curso> cursos = new ArrayList<>();
 
     //Construtor
@@ -20,8 +21,20 @@ public class Aluno {
     }
 
     //Getters
+
+    public List<Nota> getNotas(){
+        return notas;
+    }
     public String getId(){
         return id;
+    }
+
+    public Curso getCurso(){
+        return curso;
+    }
+
+    public Matricula getMatricula(){
+        return matricula;
     }
 
     public String getNome(){
@@ -62,8 +75,23 @@ public class Aluno {
         cursos.remove(curso);
     }
 
-    public void setIdMatricula(String idMatricula){
-        this.idMatricula = idMatricula;
+    public void setMatricula(Matricula matricula){
+        this.matricula = matricula;
+    }
+
+    public void setCurso(Curso curso){
+        this.curso = curso;
+    }
+
+    public void addNota(Nota nota){
+        notas.add(nota);
+    }
+
+    public String listarNotas(){
+        for(Nota nota : notas){
+            return "Disciplina: " + nota.getDisciplina().getNome() + "Nota: " + nota.getNota();
+        }
+        return "";
     }
 
     //Verificar se o ID está sendo usado
