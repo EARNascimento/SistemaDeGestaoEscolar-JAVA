@@ -32,6 +32,15 @@ public class Utilitarios {
         return novoCurso;
     }
 
+    public void deletarCurso(Curso curso){
+        for(Aluno aluno : curso.getAlunos()){
+            aluno.removeCurso(curso);
+        }
+
+        cursos.remove(curso);
+        JOptionPane.showMessageDialog(null, "O curso: " + curso.getName() + " foi removido com sucesso!");
+    }
+
     //Utilitários Aluno
 
     public List<Aluno> getAlunos(){
@@ -72,6 +81,15 @@ public class Utilitarios {
        Aluno aluno = procuraAluno(id);
        aluno.setEmail(email);
        JOptionPane.showMessageDialog(null, "Email do aluno: " + aluno.getNome() + " atualizado para " + email);
+    }
+
+    public void deletarAluno(Aluno aluno){
+        for(Curso curso: aluno.getCursos()){
+            curso.removeAluno(aluno);
+        }
+        alunos.remove(aluno);
+        JOptionPane.showMessageDialog(null, "O aluno: " + aluno.getNome() + " foi removido com sucesso");
+
     }
 
     //Utilitários Matricula

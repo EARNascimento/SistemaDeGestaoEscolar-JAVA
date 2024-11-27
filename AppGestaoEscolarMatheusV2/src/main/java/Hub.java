@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hub extends JFrame{
     private Utilitarios utilitarios = new Utilitarios();
@@ -325,21 +326,27 @@ public class Hub extends JFrame{
             JMenuItem itemConsultarCurso = new JMenuItem("Consultar Curso");
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
             JMenuItem itemConsultarMatricula = new JMenuItem("Consultar Matricula");
+            JMenuItem itemCadastrarDisciplina = new JMenuItem("Cadastrar Disciplina");
+            JMenuItem itemConsultarDisciplina = new JMenuItem("Consultar Disciplina");
 
             JMenuItem itemSair = new JMenuItem("Sair");
 
             // Adicionando os itens ao menu Cadastro
             menuCadastro.add(itemCadastrarCurso);
             menuCadastro.addSeparator();
-            menuCadastro.add(itemAlterarCurso);
-            menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarAluno);
             menuCadastro.addSeparator();
-            menuCadastro.add(itemMatricularAluno);
+            menuCadastro.add(itemAlterarCurso);
             menuCadastro.addSeparator();
             menuCadastro.add(itemAlterarAluno);
             menuCadastro.addSeparator();
+            menuCadastro.add(itemMatricularAluno);
+            menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarNota);
+            menuCadastro.addSeparator();
+            menuCadastro.add(itemCadastrarDisciplina);
+            menuCadastro.addSeparator();
+            menuCadastro.add(itemConsultarDisciplina);
 
             // Adicionando os itens ao menu Consulta
             menuConsulta.add(itemConsultarCurso);
@@ -445,14 +452,25 @@ public class Hub extends JFrame{
                 }
             });
 
-            //Atenção Aqui!!
-            // Manipulador de Eventos para o botão Cadastrar Notas
-            itemCadastrarNota.addActionListener(new ActionListener() {
+            // Manipulador de Eventos para o botão Cadastrar Disciplina
+            itemCadastrarDisciplina.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
+                    new CadastrarDisciplinaFrame().setVisible(true);
                 }
             });
+
+            //Manipulador de Eventos para o botão Consultar Disciplina
+            itemConsultarDisciplina.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new ConsultarDisciplinaFrame().setVisible(true);
+                }
+            });
+
+            //Manipulador de Eventos para o botão Alterar
 
             // Manipulador de Eventos para o item Consultar Aluno
             itemConsultarAluno.addActionListener(new ActionListener() {
@@ -498,6 +516,8 @@ public class Hub extends JFrame{
                     new ConsultarMatriculaFrame().setVisible(true);
                 }
             });
+
+
 
             // Tamanho dos botões
             setButtonSize(btCursoAnalise, btCadastrarCurso, btConsultarAluno, btCadastrarAluno);
@@ -597,7 +617,7 @@ public class Hub extends JFrame{
 
         public ConsultarCursoFrame(){
             setTitle("SGE - Consultar Curso");
-            setSize(400, 450); // Aumentando o tamanho da janela para acomodar os novos componentes
+            setSize(500, 500); // Aumentando o tamanho da janela para acomodar os novos componentes
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             setLayout(new GridBagLayout()); // Usando GridBagLayout para melhor controle de posicionamento
@@ -660,21 +680,19 @@ public class Hub extends JFrame{
             gbc.fill = GridBagConstraints.HORIZONTAL;
             add(painelBotoes, gbc);
 
+
+
             // Manipulador de eventos para o botão Consultar
             consultar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String idAluno = alunoIdField.getText();
-                    if (!idAluno.isEmpty()) {
-                        Aluno alunoEncontrado = utilitarios.procuraAluno(idAluno);
-                        resultadoArea.setText("Consultando informações do aluno: " + alunoEncontrado.getNome() + "\n" +
-                                "ID: " + alunoEncontrado.getId() + "\n" +
-                                "Nome: " + alunoEncontrado.getNome() + "\n" +
-                                "Data Nascimento: "  + alunoEncontrado.getDataNascimento() + "\n" +
-                                "E-mail: " + alunoEncontrado.getEmail());
-                    } else {
-                        resultadoArea.setText("Por favor, insira o ID do Aluno");
-                    }
+                    Curso curso = (Curso) cursoComboBox.getSelectedItem();
+
+                    resultadoArea.setText("Consultando informações do Curso: " + curso.getName() + "\n" +
+                            "ID: " + curso.getId() + "\n" +
+                            "Nome: " + curso.getName() + "\n" +
+                            "Disciplinas Registradas: "  + curso.getDisciplinas() + "\n" +
+                            "Alunos: " + getNomeAlunos(curso.getAlunos()));
                 }
             });
 
@@ -688,6 +706,14 @@ public class Hub extends JFrame{
                 }
             });
 
+            alterarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new AlterarCursoFrame().setVisible(true);
+                }
+            });
+
             // Configurando os manipuladores para os botões "Matricular", "Alterar", e "Excluir"
             matricularButton.addActionListener(new ActionListener() {
                 @Override
@@ -696,9 +722,20 @@ public class Hub extends JFrame{
                     new MatricularAlunoFrame().setVisible(true);
                 }
             });
-            alterarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Alterando dados do aluno..."));
-            excluir.addActionListener(e -> JOptionPane.showMessageDialog(null, "Excluindo aluno..."));
+            excluir.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    utilitarios.deletarCurso((Curso)cursoComboBox.getSelectedItem());
+                }
+            });
 
+        }
+        private String getNomeAlunos(List<Aluno> alunos){
+            StringBuilder sb = new StringBuilder();
+            for(Aluno aluno: alunos){
+                sb.append(aluno.getNome()).append("; ");
+            }
+            return sb.toString();
         }
     }
 
@@ -962,6 +999,23 @@ public class Hub extends JFrame{
                     new MatricularAlunoFrame().setVisible(true);
                 }
             });
+
+            alterarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new AlterarAlunoFrame().setVisible(true);
+                }
+            });
+
+            excluir.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String idAluno = alunoIdField.getText();
+                    Aluno aluno = utilitarios.procuraAluno(idAluno);
+                    utilitarios.deletarAluno(aluno);
+                }
+            });
         }
     }
 
@@ -996,11 +1050,7 @@ public class Hub extends JFrame{
                     String novoEmail = idEmailFieldText.getText();
                     String id = idAlunoFieldText.getText();
 
-                    Aluno aluno = utilitarios.procuraAluno(id);
-                    //Alter o nome do Curso
-                    aluno.setEmail(novoEmail);
-
-                    JOptionPane.showMessageDialog(null, "E-mail do Aluno " + aluno.getNome() + " atualizado! Novo E-mail: " + novoEmail);
+                    utilitarios.alterarAluno(id, novoEmail);
                 }
             });
 
@@ -1016,12 +1066,72 @@ public class Hub extends JFrame{
     }
 
     class CadastrarDisciplinaFrame extends JFrame{
-        private JTextField notaIdField, alunoIdField; // Campo para nome do aluno
+        private JComboBox<Curso> cursoComboBox;
+
+        public CadastrarDisciplinaFrame(){
+            setTitle("SGE - Cadastro de Disciplina");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridLayout(5, 2));
+
+            add(new JLabel("ID: "));
+            JTextField idFieldText = new JTextField();
+            add(idFieldText);
+
+            add(new JLabel("Nome da Disciplina: "));
+            JTextField nomeFieldText = new JTextField();
+            add(nomeFieldText);
+
+            add(new JLabel("Adicionar ao Curso: "));
+            cursoComboBox = new JComboBox<>();
+            for(Curso curso : utilitarios.getCursos()){
+                this.cursoComboBox.addItem(curso);
+            }
+            add(cursoComboBox);
+
+            JButton btCadastrar = new JButton("Cadastrar");
+            add(btCadastrar);
+
+            JButton voltar = new JButton("Voltar");
+            add(voltar);
+
+            //Manipulador de Eventos para Cadastrar
+            btCadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String id = idFieldText.getText();
+                    String nome = nomeFieldText.getText();
+                    Nota nota = new Nota(0);
+                    Curso curso = (Curso) cursoComboBox.getSelectedItem();
+                    //Cadastra Curso
+
+                    utilitarios.setDisciplina(id, nome, nota);
+                    Disciplina disciplina = utilitarios.procuraDisciplina(id);
+                    curso.addDisciplina(disciplina);
+                    JOptionPane.showMessageDialog(null, "A disciplina: " + nome + " foi cadastrada!");
+                }
+            });
+
+            // Manipulador de Eventos para o botão Cancelar
+            voltar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
+
+        }
+    }
+
+    class ConsultarDisciplinaFrame extends JFrame{
+        private JTextField disciplinaIdField; // Campo para nome do aluno
         private JButton consultar, voltar;
         private JTextArea resultadoArea; // Área de texto para exibir resultados
 
-        public CadastrarDisciplinaFrame(){
-            setTitle("Cadastrar Nota");
+        public ConsultarDisciplinaFrame(){
+            setTitle("SGE - Consultar Disciplina");
             setSize(400, 450); // Aumentando o tamanho da janela para acomodar os novos componentes
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -1032,16 +1142,16 @@ public class Hub extends JFrame{
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.WEST;
-            add(new JLabel("Nome do Aluno:"), gbc);
+            add(new JLabel("ID da Disciplina:"), gbc);
 
-            alunoIdField = new JTextField(20); // Campo para nome do aluno
+            disciplinaIdField = new JTextField(20); // Campo para o ID da disciplina
             gbc.gridx = 1;
             gbc.gridy = 0;
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            add(alunoIdField, gbc);
+            add(disciplinaIdField, gbc);
 
             // Botão Consultar
-            consultar = new JButton("Pesquisar");
+            consultar = new JButton("Consultar");
             gbc.gridx = 0;
             gbc.gridy = 1;
             gbc.fill = GridBagConstraints.NONE;
@@ -1063,32 +1173,20 @@ public class Hub extends JFrame{
             gbc.fill = GridBagConstraints.BOTH;
             add(scrollPane, gbc);
 
-            //Inserir Nota
-            // Adicionando o campo para Nota
-            gbc.gridx = 0;
-            gbc.gridy = 3;
-            gbc.anchor = GridBagConstraints.WEST;
-            add(new JLabel("Nota:"), gbc);
-
-
-            notaIdField = new JTextField(20); // Campo para Inserir Nota
-            gbc.gridx = 1;
-            gbc.gridy = 3;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            add(notaIdField, gbc);
-
-
-
-            // Botões adicionais
+            // Botões adicionais: Adicionar ao Curso, Alterar, Excluir
             JPanel painelBotoes = new JPanel();
             painelBotoes.setLayout(new GridLayout(1, 3, 10, 10)); // Layout para os botões de ação
 
-            JButton cadastrarButton = new JButton("Cadastrar Nota");
+            JButton alterarButton = new JButton("Alterar o Nome da Disciplina");
+            JButton excluirButton = new JButton("Excluir a Disciplina");
+            JButton adicionarNota = new JButton("Adicionar Nota à Disciplina");
 
-            painelBotoes.add(cadastrarButton);
+            painelBotoes.add(alterarButton);
+            painelBotoes.add(adicionarNota);
+            painelBotoes.add(excluirButton);
 
             gbc.gridx = 0;
-            gbc.gridy = 4;
+            gbc.gridy = 3;
             gbc.gridwidth = 2;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             add(painelBotoes, gbc);
@@ -1097,16 +1195,36 @@ public class Hub extends JFrame{
             consultar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String nomeAluno = notaIdField.getText();
-                    if (!nomeAluno.isEmpty()) {
-                        // Simulação de consulta ao banco de dados
-                        resultadoArea.setText("Consultando informações do aluno: " + nomeAluno);
-                        // Aqui você faria a busca no banco de dados, por exemplo:
-                        // String resultado = consultarAlunoNoBanco(nomeAluno);
-                        // resultadoArea.setText(resultado);
+                    String idDisciplina = disciplinaIdField.getText();
+                    if (!idDisciplina.isEmpty()) {
+                        Disciplina disciplinaEncontrada = utilitarios.procuraDisciplina(idDisciplina);
+
+                        resultadoArea.setText("Consultando informações da Matrícula: " + disciplinaEncontrada.getId() + "\n" +
+                                "Nome: " + disciplinaEncontrada.getNome() + "\n" +
+                                "Curso(s): " + disciplinaEncontrada.getCursos() + "\n");
+
                     } else {
-                        resultadoArea.setText("Por favor, insira o nome do aluno.");
+                        resultadoArea.setText("Por favor, insira o ID da Disciplina");
                     }
+                }
+            });
+
+            //Manipulador de Eventos para o botão Alterar Curso
+            alterarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new AlterarDisciplinaFrame().setVisible(true);
+                }
+            });
+
+            //Manipulador de Eventos para o botão Desmatricular Aluno
+            excluirButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String id = disciplinaIdField.getText();
+                    Matricula matricula = utilitarios.procuraMatricula(id);
+                    utilitarios.desMatricula(matricula);
                 }
             });
 
@@ -1114,21 +1232,10 @@ public class Hub extends JFrame{
             voltar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Aqui você pode fechar a janela atual e abrir a Tela Inicial
                     setVisible(false); // Fecha a janela atual
-
+                    new MenuInicial().setVisible(true);
                 }
             });
-
-            // Configurando os manipuladores para os botões "Matricular", "Alterar", e "Excluir"
-            cadastrarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Matriculando aluno..."));
-
-        }
-    }
-
-    class ConsultarDisciplinaFrame extends JFrame{
-        public ConsultarDisciplinaFrame(){
-
         }
     }
 

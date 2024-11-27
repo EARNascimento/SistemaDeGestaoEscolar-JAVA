@@ -13,7 +13,13 @@ public class Disciplina {
         this.nota = nota;
     }
 
+
+
     //Getters
+    public List<Curso> getCursos(){
+        return cursos;
+    }
+
     public String getId(){
         return id;
     }

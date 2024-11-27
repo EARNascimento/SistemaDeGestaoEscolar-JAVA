@@ -23,6 +23,14 @@ public class Curso {
         return name;
     }
 
+    public List<Aluno> getAlunos(){
+        return alunos;
+    }
+
+    public List<Disciplina> getDisciplinas(){
+        return disciplinas;
+    }
+
     //Setters
     public void setName(String name){
         this.name = name;
