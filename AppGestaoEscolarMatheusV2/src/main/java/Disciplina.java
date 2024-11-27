@@ -4,18 +4,20 @@ import java.util.List;
 public class Disciplina {
     private final String id;
     private String nome;
-    private Nota nota;
-    private List<Curso> cursos = new ArrayList<>();
 
-    public Disciplina(String id, String nome, Nota nota){
+
+    public Disciplina(String id, String nome){
         this.id = id;
         this.nome = nome;
+<<<<<<< HEAD
         this.nota = nota;
     }
 
     //Getters
     public List<Curso> getCursos(){
         return cursos;
+=======
+>>>>>>> monolito
     }
 
     public String getId(){
