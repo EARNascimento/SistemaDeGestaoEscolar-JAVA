@@ -4,12 +4,13 @@ import java.util.List;
 public class Disciplina {
     private final String id;
     private String nome;
-    private double nota;
+    private Nota nota;
     private List<Curso> cursos = new ArrayList<>();
 
-    public Disciplina(String id, String nome){
+    public Disciplina(String id, String nome, Nota nota){
         this.id = id;
         this.nome = nome;
+        this.nota = nota;
     }
 
     //Getters

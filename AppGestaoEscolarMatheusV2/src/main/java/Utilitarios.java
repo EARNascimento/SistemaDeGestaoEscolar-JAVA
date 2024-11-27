@@ -9,6 +9,7 @@ public class Utilitarios {
     private List<Curso> cursos = new ArrayList<>();
     private List<Aluno> alunos = new ArrayList<>();
     private List<Matricula> matriculas = new ArrayList<>();
+    private List<Disciplina> disciplinas = new ArrayList<>();
 
     public Utilitarios() {
 
@@ -32,6 +33,10 @@ public class Utilitarios {
     }
 
     //Utilitários Aluno
+
+    public List<Aluno> getAlunos(){
+        return alunos;
+    }
 
     public void setAluno(String id, String nome, String dataNascimento, String email){
         Aluno novoAluno = new Aluno(id, nome, dataNascimento, email);
@@ -114,6 +119,40 @@ public class Utilitarios {
 
         JOptionPane.showMessageDialog(null, "O aluno " + alunoMatriculado.getNome() + " foi desmatriculado!");
         JOptionPane.showMessageDialog(null, "O ID de Matrícula: " + matricula.getId() + " foi desativado!");
+    }
+
+    //Utiitários Disciplina
+
+    public List<Disciplina> getDisciplina(){
+        return disciplinas;
+    }
+
+    public void setDisciplina(String id, String nome, Nota nota){
+        Disciplina novaDisciplina = new Disciplina(id, nome, nota);
+        if(!disciplinas.contains(novaDisciplina)){
+            disciplinas.add(novaDisciplina);
+            JOptionPane.showMessageDialog(null, "A disciplina: " + id + " foi cadastrada com sucesso!");
+        } else{
+            JOptionPane.showMessageDialog(null, "A matrícula: " + id + " já existe!");
+        }
+    }
+
+    public Disciplina procuraDisciplina(String id){
+        boolean encontrei = false;
+        Disciplina result = null;
+
+        for(Disciplina disciplina : disciplinas){
+            if(disciplina.getId().equals(id)){
+                result = disciplina;
+                encontrei = true;
+                break;
+            }
+        }
+        if(!encontrei){
+            JOptionPane.showMessageDialog(null, "Disciplina não encontrada!");
+            throw new RuntimeException("Disciplina não encontrada");
+        }
+        return result;
     }
 
     //Utilitários Load de Arquivos

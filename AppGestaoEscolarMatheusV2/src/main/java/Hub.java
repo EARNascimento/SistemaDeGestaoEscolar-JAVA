@@ -318,9 +318,9 @@ public class Hub extends JFrame{
             // Criando os itens do Menu
             JMenuItem itemCadastrarCurso = new JMenuItem("Cadastrar Curso");
             JMenuItem itemCadastrarAluno = new JMenuItem("Cadastrar Aluno");
+            JMenuItem itemAlterarCurso = new JMenuItem("Alterar Curso");
             JMenuItem itemMatricularAluno = new JMenuItem("Matricular Aluno");
             JMenuItem itemCadastrarNota = new JMenuItem("Cadastrar Nota");
-
             JMenuItem itemConsultarCurso = new JMenuItem("Consultar Curso");
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
             JMenuItem itemConsultarMatricula = new JMenuItem("Consultar Matricula");
@@ -331,6 +331,8 @@ public class Hub extends JFrame{
             menuCadastro.add(itemCadastrarCurso);
             menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarAluno);
+            menuCadastro.addSeparator();
+            menuCadastro.add(itemAlterarCurso);
             menuCadastro.addSeparator();
             menuCadastro.add(itemMatricularAluno);
             menuCadastro.addSeparator();
@@ -392,6 +394,15 @@ public class Hub extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
                     new CadastrarCursoFrame().setVisible(true);
+                }
+            });
+
+            //Manipulador de Eventos para o botão Alterar Curso
+            itemAlterarCurso.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new AlterarCursoFrame().setVisible(true);
                 }
             });
 
@@ -727,8 +738,56 @@ public class Hub extends JFrame{
     }
 
     class AlterarCursoFrame extends JFrame{
-        public AlterarCursoFrame(){
+        private JComboBox<Curso> cursoComboBox;
 
+        public AlterarCursoFrame(){
+            setTitle("SGE - Alterar o Nome do Curso");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridLayout(5, 2));
+            cursoComboBox = new JComboBox<>();
+
+            //Adiciona todos os cursos consultados
+            for(Curso curso : utilitarios.getCursos()){
+                this.cursoComboBox.addItem(curso);
+            }
+            //Adicionar uma ComboBox aqui!
+            add(new JLabel("Selecione o curso: "));
+            add(cursoComboBox);
+
+            add(new JLabel("Novo Nome do Curso :"));
+            JTextField idFieldText = new JTextField();
+            add(idFieldText);
+
+            JButton btCadastrar = new JButton("Alterar");
+            add(btCadastrar);
+
+            JButton voltar = new JButton("Voltar");
+            add(voltar);
+
+            //Manipulador de Eventos para Alterar
+            btCadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Curso curso = (Curso) cursoComboBox.getSelectedItem();
+                    String novoNome = idFieldText.getText();
+
+                    //Alter o nome do Curso
+                    curso.setName(novoNome);
+
+                    JOptionPane.showMessageDialog(null, "Curso atualizado! Novo nome: "+ novoNome);
+                }
+            });
+
+            // Manipulador de Eventos para o botão Cancelar
+            voltar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
         }
     }
 
