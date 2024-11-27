@@ -68,6 +68,12 @@ public class Utilitarios {
         return result;
     }
 
+    public void alterarAluno(String id, String email){
+       Aluno aluno = procuraAluno(id);
+       aluno.setEmail(email);
+       JOptionPane.showMessageDialog(null, "Email do aluno: " + aluno.getNome() + " atualizado para " + email);
+    }
+
     //Utilitários Matricula
 
     public List<Matricula> getMatriculas(){

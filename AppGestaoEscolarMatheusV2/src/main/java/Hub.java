@@ -319,6 +319,7 @@ public class Hub extends JFrame{
             JMenuItem itemCadastrarCurso = new JMenuItem("Cadastrar Curso");
             JMenuItem itemCadastrarAluno = new JMenuItem("Cadastrar Aluno");
             JMenuItem itemAlterarCurso = new JMenuItem("Alterar Curso");
+            JMenuItem itemAlterarAluno = new JMenuItem("Alterar Aluno");
             JMenuItem itemMatricularAluno = new JMenuItem("Matricular Aluno");
             JMenuItem itemCadastrarNota = new JMenuItem("Cadastrar Nota");
             JMenuItem itemConsultarCurso = new JMenuItem("Consultar Curso");
@@ -330,11 +331,13 @@ public class Hub extends JFrame{
             // Adicionando os itens ao menu Cadastro
             menuCadastro.add(itemCadastrarCurso);
             menuCadastro.addSeparator();
-            menuCadastro.add(itemCadastrarAluno);
-            menuCadastro.addSeparator();
             menuCadastro.add(itemAlterarCurso);
             menuCadastro.addSeparator();
+            menuCadastro.add(itemCadastrarAluno);
+            menuCadastro.addSeparator();
             menuCadastro.add(itemMatricularAluno);
+            menuCadastro.addSeparator();
+            menuCadastro.add(itemAlterarAluno);
             menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarNota);
 
@@ -403,6 +406,15 @@ public class Hub extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     setVisible(false);
                     new AlterarCursoFrame().setVisible(true);
+                }
+            });
+
+            //Manipulador de Eventos para o botão Alterar Aluno
+            itemAlterarAluno.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new AlterarAlunoFrame().setVisible(true);
                 }
             });
 
@@ -955,7 +967,51 @@ public class Hub extends JFrame{
 
     class AlterarAlunoFrame extends JFrame{
         public AlterarAlunoFrame(){
+            setTitle("SGE - Alterar o E-mail do Aluno");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridLayout(5, 2));
 
+
+            //Adicionar uma ComboBox aqui!
+            add(new JLabel("ID do Aluno: "));
+            JTextField idAlunoFieldText = new JTextField();
+            add(idAlunoFieldText);
+
+            add(new JLabel("Novo E-mail do Aluno :"));
+            JTextField idEmailFieldText = new JTextField();
+            add(idEmailFieldText);
+
+            JButton btCadastrar = new JButton("Alterar");
+            add(btCadastrar);
+
+            JButton voltar = new JButton("Voltar");
+            add(voltar);
+
+            //Manipulador de Eventos para Alterar
+            btCadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String novoEmail = idEmailFieldText.getText();
+                    String id = idAlunoFieldText.getText();
+
+                    Aluno aluno = utilitarios.procuraAluno(id);
+                    //Alter o nome do Curso
+                    aluno.setEmail(novoEmail);
+
+                    JOptionPane.showMessageDialog(null, "E-mail do Aluno " + aluno.getNome() + " atualizado! Novo E-mail: " + novoEmail);
+                }
+            });
+
+            // Manipulador de Eventos para o botão Cancelar
+            voltar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
         }
     }
 
