@@ -22,7 +22,7 @@ public class Nota {
         return disciplina;
     }
     //Setters
-    public void setNota(){
+    public void setNota(double nota){
         this.nota = nota;
     }
 }

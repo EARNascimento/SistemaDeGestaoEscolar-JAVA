@@ -94,6 +94,17 @@ public class Aluno {
         return "";
     }
 
+    public void alterarNota(String idDisciplina, double novoValor) {
+        for (Nota nota : notas) {
+            if (nota.getDisciplina().getNome().equalsIgnoreCase(idDisciplina)) {
+                nota.setNota(novoValor);
+                System.out.println("Nota da disciplina " + idDisciplina + " atualizada para " + novoValor);
+                return;
+            }
+        }
+        System.out.println("Disciplina " + idDisciplina + " não encontrada.");
+    }
+
     //Verificar se o ID está sendo usado
     public boolean equals(Object obj){
         if (obj instanceof Aluno other){

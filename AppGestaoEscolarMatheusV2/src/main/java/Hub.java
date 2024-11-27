@@ -561,9 +561,19 @@ public class Hub extends JFrame{
             itemConsultarNota.addActionListener((new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    setVisible(false);
+                    new ConsultarNotaFrame().setVisible(true);
                 }
             }));
+
+            //Manipulador de Eventos para o item Alterar Nota
+            itemAlterarNota.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new AlterarNotaFrame().setVisible(true);
+                }
+            });
             // Tamanho dos botões
             setButtonSize(btCursoAnalise, btCadastrarCurso, btConsultarAluno, btCadastrarAluno);
 
@@ -1739,7 +1749,51 @@ public class Hub extends JFrame{
 
     class AlterarNotaFrame extends JFrame{
         public AlterarNotaFrame(){
+            setTitle("SGE - Alterar a Nota");
+            setSize(400, 300);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setLayout(new GridLayout(5, 2));
 
+            add(new JLabel("ID do Aluno: "));
+            JTextField idAlunoFieldText = new JTextField();
+            add(idAlunoFieldText);
+
+            add(new JLabel("ID da Disciplina: "));
+            JTextField idDisciplinaFieldText = new JTextField();
+            add(idDisciplinaFieldText);
+
+            add(new JLabel("Nova nota :"));
+            JTextField nomeFieldText = new JTextField();
+            add(nomeFieldText);
+
+            JButton btCadastrar = new JButton("Alterar");
+            add(btCadastrar);
+
+            JButton voltar = new JButton("Voltar");
+            add(voltar);
+
+            //Manipulador de Eventos para Alterar
+            btCadastrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    double novaNota = Double.parseDouble(nomeFieldText.getText());
+                    String id = idDisciplinaFieldText.getText();
+                    String idAluno = idAlunoFieldText.getText();
+
+                    Aluno aluno = utilitarios.procuraAluno(idAluno);
+                    aluno.alterarNota(id, novaNota);
+                }
+            });
+
+            // Manipulador de Eventos para o botão Cancelar
+            voltar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    new MenuInicial().setVisible(true);
+                }
+            });
         }
     }
 
