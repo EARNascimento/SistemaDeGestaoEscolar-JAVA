@@ -48,17 +48,17 @@ public class Hub extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, """
-                        Aluno: Matheus / RA: \n
+                        Aluno: Matheus F. R. Martins / RA: A07251258 \n
                         E-mail: matheus1030br@gmail.com \n
                         Função: Front-End
                         -------------------------------------------------------- \n
-                        Aluno: Eduardo A. R. Nascimento / RA: \n
+                        Aluno: Eduardo A. R. Nascimento / RA: A06166824 \n
                         E-mail: eduardo.alfredo@a.unileste.edu.br \n
                         Função: Back-End
                         -------------------------------------------------------- \n
                         Aluno: Gabriel Camilo / RA: \n
                         E-mail: \n
-                        Função:""");
+                        Função: Back-End""");
             }
         });
 
