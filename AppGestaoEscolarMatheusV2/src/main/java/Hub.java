@@ -56,7 +56,7 @@ public class Hub extends JFrame{
                         E-mail: eduardo.alfredo@a.unileste.edu.br \n
                         Função: Back-End
                         -------------------------------------------------------- \n
-                        Aluno: Gabriel Camilo / RA: \n
+                        Aluno: Gabriel C. M. Silva / RA: \n
                         E-mail: \n
                         Função: Back-End""");
             }
