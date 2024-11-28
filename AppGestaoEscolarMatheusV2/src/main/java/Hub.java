@@ -322,12 +322,11 @@ public class Hub extends JFrame{
             JMenuItem itemAlterarCurso = new JMenuItem("Alterar Curso");
             JMenuItem itemAlterarAluno = new JMenuItem("Alterar Aluno");
             JMenuItem itemMatricularAluno = new JMenuItem("Matricular Aluno");
-<<<<<<< HEAD
-=======
+
             JMenuItem itemCadastrarNota = new JMenuItem("Cadastrar Nota");
             JMenuItem itemConsultarNota = new JMenuItem("Consultar Nota");
             JMenuItem itemAlterarNota = new JMenuItem("Alterar Nota");
->>>>>>> monolito
+
             JMenuItem itemConsultarCurso = new JMenuItem("Consultar Curso");
             JMenuItem itemConsultarAluno = new JMenuItem("Consultar Aluno");
             JMenuItem itemConsultarMatricula = new JMenuItem("Consultar Matricula");
@@ -349,15 +348,12 @@ public class Hub extends JFrame{
             menuCadastro.addSeparator();
             menuCadastro.add(itemMatricularAluno);
             menuCadastro.addSeparator();
-<<<<<<< HEAD
-=======
             menuCadastro.add(itemAlterarMatricula);
             menuCadastro.addSeparator();
             menuCadastro.add(itemCadastrarNota);
             menuCadastro.addSeparator();
             menuCadastro.add(itemAlterarNota);
             menuCadastro.addSeparator();
->>>>>>> monolito
             menuCadastro.add(itemCadastrarDisciplina);
             menuCadastro.addSeparator();
             menuCadastro.add(itemAlterarDisciplina);
@@ -1144,6 +1140,13 @@ public class Hub extends JFrame{
             JTextField nomeFieldText = new JTextField();
             add(nomeFieldText);
 
+            add(new JLabel("Selecione o Curso da Disciplina: "));
+            cursoComboBox = new JComboBox<>();
+            for(Curso curso : utilitarios.getCursos()){
+                this.cursoComboBox.addItem(curso);
+            }
+            add(cursoComboBox);
+
             JButton btCadastrar = new JButton("Cadastrar");
             add(btCadastrar);
 
@@ -1162,7 +1165,8 @@ public class Hub extends JFrame{
                     utilitarios.setDisciplina(id, nome);
                     Disciplina disciplina = utilitarios.procuraDisciplina(id);
                     curso.addDisciplina(disciplina);
-                    JOptionPane.showMessageDialog(null, "A disciplina: " + nome + " foi cadastrada!");
+                    JOptionPane.showMessageDialog(null, "A disciplina: " + nome + " foi cadastrada " +
+                            "e adicionada ao Curso: " + curso.getName());
                 }
             });
 
@@ -1598,7 +1602,7 @@ public class Hub extends JFrame{
             JTextField idAlunoFieldText = new JTextField();
             add(idAlunoFieldText);
 
-            add(new JLabel("ID do Curso: "));
+            add(new JLabel("ID da Disciplina: "));
             JTextField idDisciplinaFieldText = new JTextField();
             add(idDisciplinaFieldText);
 
